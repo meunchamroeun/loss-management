@@ -813,6 +813,17 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
  .deck.printing *,.deck.printing *::before,.deck.printing *::after{animation-duration:1ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition:none!important}
  .qrbox .scanl,.notif,.cta,.hz{display:none!important}
 }
+
+/* ===== click left/right to navigate ===== */
+.edge{position:absolute;top:0;bottom:72px;width:96px;z-index:15;display:flex;align-items:center;pointer-events:none;opacity:0;transition:opacity .25s}
+.deck.fs .edge{bottom:0}
+.eL{left:0;justify-content:flex-start;padding-left:18px}.eR{right:0;justify-content:flex-end;padding-right:18px}
+.edge span{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--pb);color:var(--tx);box-shadow:var(--shadow);transition:transform .2s}
+.edge span svg{width:24px;height:24px}
+.deck.navL .eL,.deck.navR .eR{opacity:1}
+.deck.navL .eL span,.deck.navR .eR span{transform:scale(1.06)}
+.deck.navL .viewport,.deck.navR .viewport{cursor:pointer}
+@media print{.edge{display:none!important}}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:50;background:rgba(5,4,15,.82);display:none;align-items:center;justify-content:center;padding:40px;backdrop-filter:blur(6px)}
 .lb.open{display:flex;animation:fade .3s ease}
@@ -842,6 +853,7 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .dots-nav button.cur span{display:inline;color:var(--tx)}
 .dots-nav button:hover{border-color:var(--pri)}
 .sep{width:1px;height:30px;background:var(--pb)}
+@media (max-width:1760px){.dots-nav button.cur span{display:none}}
 @media (max-width:1250px){.dots-nav button:not(.cur){display:none}}
 @media (max-width:820px){.brand div,.nb .tx{display:none}.dots-nav{display:none}.bar{justify-content:space-between}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
@@ -1213,6 +1225,7 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 
 </div>
 
+<div class="edge eL" aria-hidden="true"><span><i data-i="chev-l"></i></span></div><div class="edge eR" aria-hidden="true"><span><i data-i="chev-r"></i></span></div>
 <div class="bar" id="bar">
   <div class="prog" id="prog"></div>
   <div class="brand"><span class="logo"></span><div><b>ELMS Demo</b><span id="cnt">Slide 1 of 14</span></div></div>
@@ -1526,6 +1539,12 @@ window.__prepPrint=prepPrint;window.__endPrint=endPrint;
 addEventListener('beforeprint',prepPrint);addEventListener('afterprint',endPrint);
 document.getElementById('printb').onclick=()=>{prepPrint();setTimeout(()=>{window.print()},60)};
 addEventListener('keydown',e=>{if((e.key==='p'||e.key==='P')&&!e.ctrlKey&&!e.metaKey&&!e.target.closest('input')){prepPrint();setTimeout(()=>window.print(),60)}});
+/* ---------- click left / right side of the slide (Canva-style) ---------- */
+const NAV_SKIP='button,a,input,select,textarea,label,[role="button"],[data-go],[data-lb],.tr,.stp,.tg,.lv button,.lmenu,.langsw,.qrc,.hcard,.app';
+function navSide(e){const r=vp.getBoundingClientRect();return (e.clientX-r.left)<r.width*0.3?-1:1}
+vp.addEventListener('click',e=>{if(e.target.closest(NAV_SKIP))return;if(getSelection&&String(getSelection()).length)return;go(cur+navSide(e))});
+vp.addEventListener('mousemove',e=>{const ok=!e.target.closest(NAV_SKIP);const s=navSide(e);deck.classList.toggle('navL',ok&&s<0&&cur>0);deck.classList.toggle('navR',ok&&s>0&&cur<N-1)});
+vp.addEventListener('mouseleave',()=>deck.classList.remove('navL','navR'));
 fit();
 const h=parseInt(location.hash.slice(1));go(h>=1&&h<=N?h-1:0);
 })();

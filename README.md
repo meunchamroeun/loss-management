@@ -8,6 +8,7 @@ Energy Loss Management System (ELMS) demo presentation for EDC, by OONE Power Te
 
 Open the file in a browser. Controls:
 
+- Click the right side of a slide for next, the left side for back (like Canva)
 - Arrow keys / Space: next and previous slide
 - `F`: full screen
 - `T`: switch light / dark mode
