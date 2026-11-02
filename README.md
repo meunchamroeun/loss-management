@@ -11,4 +11,5 @@ Open the file in a browser. Controls:
 - Arrow keys / Space: next and previous slide
 - `F`: full screen
 - `T`: switch light / dark mode
+- `L`: switch English / Khmer (EN / ខ្មែរ button in the bottom bar). English is the default; add `?lang=km` to the link to open in Khmer.
 - Swipe on touch screens
