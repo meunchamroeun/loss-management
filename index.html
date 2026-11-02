@@ -618,10 +618,22 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .al{width:620px!important;top:340px!important}
 
 /* ===== language switch + Khmer typography ===== */
-.langsw{display:flex;gap:2px;padding:3px;border-radius:12px;border:1px solid var(--pb)}
-.langsw button{all:unset;cursor:pointer;height:36px;min-width:44px;padding:0 10px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font:600 14px Inter;color:var(--mu);transition:all .25s}
-.langsw button.on{background:linear-gradient(110deg,var(--pri),var(--pri2));color:#fff}
-.langsw button:focus-visible{outline:3px solid var(--amb)}
+.langsw{position:relative}
+.langsw .lbtn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 10px 0 12px;border-radius:12px;border:1px solid var(--pb);font:600 13px 'JetBrains Mono';color:var(--tx);transition:border-color .25s,background .25s}
+.langsw .lbtn svg{width:16px;height:16px;color:var(--pri)}
+.langsw .lbtn .lchev svg{width:13px;height:13px;color:var(--mu);transition:transform .25s}
+.langsw:hover .lbtn,.langsw.open .lbtn{border-color:var(--pri);background:var(--panel2)}
+.langsw:hover .lchev svg,.langsw.open .lchev svg{transform:rotate(180deg)}
+.langsw .lbtn:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+.langsw .lmenu{position:absolute;right:0;bottom:calc(100% + 10px);min-width:168px;padding:6px;border-radius:14px;background:var(--panel);border:1px solid var(--pb);box-shadow:0 18px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateY(6px) scale(.98);transform-origin:bottom right;transition:opacity .2s,transform .2s var(--ease),visibility 0s .2s}
+.langsw .lmenu::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px}
+.langsw:hover .lmenu,.langsw.open .lmenu,.langsw:focus-within .lmenu{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s var(--ease)}
+.langsw .lmenu button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;height:38px;padding:0 10px;border-radius:9px;font:500 14px Inter;color:var(--tx);transition:background .2s}
+.langsw .lmenu button:hover,.langsw .lmenu button:focus-visible{background:var(--panel2)}
+.langsw .lmenu .lc{font:600 11px 'JetBrains Mono';width:28px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--pb);color:var(--mu)}
+.langsw .lmenu .lok{margin-left:auto;opacity:0}.langsw .lmenu .lok svg{width:16px;height:16px;color:var(--pri);stroke-width:3}
+.langsw .lmenu button.on{font-weight:600}.langsw .lmenu button.on .lc{background:linear-gradient(110deg,var(--pri),var(--pri2));color:#fff;border-color:transparent}
+.langsw .lmenu button.on .lok{opacity:1}
 .deck[data-lang="km"] *{letter-spacing:0!important}
 .deck[data-lang="km"] .h{font-size:52px;line-height:1.38}
 .deck[data-lang="km"] .t-title{font-size:74px;line-height:1.3}
@@ -1060,7 +1072,8 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
   <nav class="dots-nav" id="dn" aria-label="Slides"></nav>
   <button class="nb pri" id="next"><span class="tx" id="nextTx">Next</span><i data-i="chev-r"></i></button>
   <span class="sep"></span>
-  <div class="langsw" role="group" aria-label="Language"><button data-l="en" class="on" aria-pressed="true">EN</button><button data-l="km" aria-pressed="false">ខ្មែរ</button></div>
+  <div class="langsw" id="langDD"><button class="lbtn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Language"><i data-i="globe"></i><span id="langCur">EN</span><i data-i="chev-up" class="lchev"></i></button>
+    <div class="lmenu" role="menu"><button role="menuitemradio" data-l="en" class="on" aria-checked="true"><span class="lc">EN</span>English<i data-i="check" class="lok"></i></button><button role="menuitemradio" data-l="km" aria-checked="false"><span class="lc">KH</span>ខ្មែរ<i data-i="check" class="lok"></i></button></div></div>
   <button class="nb" id="theme" aria-label="Toggle light and dark mode"><i data-i="sun" id="thIc"></i><span class="tx" id="thTx">Light</span></button>
   <button class="nb" id="fsb" aria-label="Full screen"><i data-i="expand"></i><span class="tx">Full screen</span></button>
 </div>
@@ -1120,6 +1133,8 @@ chat:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
 sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
 moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
 x:'<path d="M18 6 6 18M6 6l12 12"/>',
+globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+'chev-up':'<path d="m18 15-6-6-6 6"/>',
 eye:'<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
 pause:'<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>',
 play:'<path d="M6 3l14 9-14 9z"/>'
@@ -1430,11 +1445,12 @@ function setLang(l){LANG=l==='km'?'km':'en';deck.dataset.lang=LANG;document.docu
  I18N.forEach(o=>o.n.nodeValue=LANG==='km'?o.km:o.en);
  document.querySelectorAll('[data-kh]').forEach(e=>e.innerHTML=LANG==='km'?e.dataset.kh:e.dataset.en);
  document.querySelectorAll('[data-enph]').forEach(e=>e.placeholder=tr(e.dataset.enph));
- document.querySelectorAll('.langsw button').forEach(b=>{const on=b.dataset.l===LANG;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
+ document.querySelectorAll('.lmenu button').forEach(b=>{const on=b.dataset.l===LANG;b.classList.toggle('on',on);b.setAttribute('aria-checked',on)});document.getElementById('langCur').textContent=LANG==='km'?'KH':'EN';
  document.getElementById('thTx').textContent=tr(deck.dataset.theme==='dark'?'Light':'Dark');
  if(cur>=0){const c=cur;cur=-1;slides[c].classList.add('on');go(c)}
 }
-document.querySelectorAll('.langsw button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+document.querySelectorAll('.lmenu button').forEach(b=>b.onclick=e=>{e.stopPropagation();setLang(b.dataset.l);langDD.classList.remove('open');b.blur();document.getElementById('langBtn').setAttribute('aria-expanded','false')});
+const langDD=document.getElementById('langDD');document.getElementById('langBtn').onclick=e=>{e.stopPropagation();const o=langDD.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',o)};document.addEventListener('click',()=>{langDD.classList.remove('open')});addEventListener('keydown',e=>{if(e.key==='Escape')langDD.classList.remove('open')});
 addEventListener('keydown',e=>{if((e.key==='l'||e.key==='L')&&!e.target.closest('input'))setLang(LANG==='km'?'en':'km')});
 {const q=new URLSearchParams(location.search).get('lang');setLang(q==='km'?'km':'en');}
 fit();
