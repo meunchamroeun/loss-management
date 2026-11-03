@@ -4,7 +4,7 @@ Energy Loss Management System (ELMS) demo presentation for EDC, by OONE Power Te
 
 ## Presentation
 
-`index.html` is the self-contained HTML slide deck (15 slides, English). Fonts and images are embedded, so it works offline.
+`index.html` is the self-contained HTML slide deck (16 slides, English). Fonts and images are embedded, so it works offline.
 
 Open the file in a browser. Controls:
 
