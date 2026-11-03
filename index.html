@@ -1150,7 +1150,7 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .achart .tk{font:500 11px 'JetBrains Mono';fill:var(--mu)}
 .achart .cb.ok{fill:var(--pri)}.achart .cb.zero{fill:#ff3b30}.achart .cb.drop{fill:var(--mu)}
 .alg[data-step="2"] .achart .cb.drop,.alg[data-step="3"] .achart .cb.drop{fill:#ff3b30}
-.achart .zband{fill:#ff3b30;opacity:.08}.achart .nband{fill:var(--pri);opacity:.12}
+.achart .zband{fill:#ff3b30;opacity:.08}.achart .nband{fill:var(--pri);fill-opacity:.12}
 .achart .zlab{font:700 18px Inter;fill:#ff3b30}
 .achart .pl{fill:none;stroke-width:3;stroke-linejoin:round}.achart .pl.base{stroke:var(--mu);stroke-dasharray:5 5}.achart .pl.recent{stroke:#ff3b30}.achart .pl.nbr{stroke:var(--grn)}
 .arule{flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;color:var(--mu);border-top:1px solid var(--pb);padding-top:8px}.arule b{font:600 12px 'JetBrains Mono';color:var(--tx);padding:1px 6px;border-radius:5px;background:var(--panel2);border:1px solid var(--pb);margin-right:6px}
@@ -1255,6 +1255,17 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .hwp.solo .tag{font-size:16px;padding:4px 12px}
 .hwp.solo b{font-size:56px;letter-spacing:-.03em}
 .hwp.solo small{font-size:22px}
+
+/* clean PDF for algorithm slides */
+.deck.printing .alg .adim{opacity:0!important}
+.deck.printing .alg .aring.r2{display:none!important}
+.deck.printing .alg .aring{animation:none!important;transform:none!important;stroke-opacity:1!important}
+.deck.printing .alg .algcnt{visibility:hidden}
+
+/* flat PDF: no shadows / blur / masks (Mac Preview draws them as boxes) */
+.deck.printing *,.deck.printing *::before,.deck.printing *::after{box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important;mix-blend-mode:normal!important}
+.deck.printing .bgfx,.deck.printing .lvspot,.deck.printing .alg .adim,.deck.printing .night .glow,.deck.printing .aphint{display:none!important}
+.deck.printing .alg .sp,.deck.printing .alg mask{display:none}
 /* ===== Apple-style text reveal slide ===== */
 .ape{position:absolute;left:110px;top:62px}
 .aphint{display:none!important;position:absolute;right:110px;top:62px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mu)}
@@ -1710,7 +1721,7 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 <section class="slide" data-label="Sudden drop">
 <div class="stage alg " id="alg3" data-step="0">
   <div class="algsc a" style="--d:1;top:220px;height:606px"><div class="algscene" data-vb="950 400 690 340"></div>
-  <svg class="algov" viewBox="950 400 690 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><filter id="a3B" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter><mask id="a3M"><rect x="900" y="350" width="790" height="440" fill="#fff"/><g filter="url(#a3B)"><rect class="sp h2" x="1110" y="600" width="120" height="130" rx="24"/><rect class="sp h3" x="1020" y="560" width="220" height="180" rx="24"/><rect class="sp h3" x="1060" y="440" width="90" height="80" rx="24"/></g></mask></defs><rect class="adim v2 v3" x="900" y="350" width="790" height="440" mask="url(#a3M)"/><circle cx="1170" cy="672" r="44" class="aring v2 v3"/><circle cx="1170" cy="672" r="44" class="aring r2 v2 v3"/></svg><div class="atg up sm v0 v1" style="left:11.59%;top:64.12%"><b>F1-1</b><span>310 kWh</span></div><div class="atg up sm v0 v1" style="left:31.88%;top:64.12%"><b>F1-2</b><span>320 kWh</span></div><div class="atg up sm v0 v1" style="left:63.77%;top:64.12%"><b>F2-1</b><span>290 kWh</span></div><div class="atg up sm v0 v1" style="left:84.06%;top:64.12%"><b>F2-2</b><span>335 kWh</span></div><div class="atg up sm bad v2 v3" style="left:31.88%;top:64.12%"><b>F1-2</b><span>95 kWh ↓70%</span></div><div class="atg up sm ok v3" style="left:11.59%;top:64.12%"><b>F1-1</b><span>310 kWh ✓</span></div><div class="atg up sm v2" style="left:63.77%;top:64.12%"><b>F2-1</b><span>290 kWh</span></div><div class="atg up sm v2" style="left:84.06%;top:64.12%"><b>F2-2</b><span>335 kWh</span></div><div class="atg up ok v3" style="left:21.74%;top:20.59%"><b data-kh="ត្រង់ស្វូ F1">Transformer F1</b><span data-kh="អ្នកជិតខាងធម្មតា">Neighbours normal</span></div><div class="atg up alert v3" style="left:72.46%;top:47.06%"><b data-kh="ការជូនដំណឹង · ធ្លាក់ចុះភ្លាមៗ">Alert · sudden drop</b><span data-kh="−70% រយៈពេល 3 ខែ → ចុះពិនិត្យ">−70% for 3 months → inspect</span></div></div>
+  <svg class="algov" viewBox="950 400 690 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><filter id="a3B" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter><mask id="a3M"><rect x="900" y="350" width="790" height="440" fill="#fff"/><g filter="url(#a3B)"><rect class="sp h2" x="1110" y="600" width="120" height="130" rx="24"/><rect class="sp h3" x="1020" y="560" width="220" height="180" rx="24"/><rect class="sp h3" x="1060" y="440" width="90" height="80" rx="24"/></g></mask></defs><rect class="adim v2 v3" x="900" y="350" width="790" height="440" mask="url(#a3M)"/><circle cx="1170" cy="672" r="44" class="aring v2 v3"/><circle cx="1170" cy="672" r="44" class="aring r2 v2 v3"/></svg><div class="atg up sm v0 v1" style="left:11.59%;top:64.12%"><b>F1-1</b><span>310 kWh</span></div><div class="atg up sm v0 v1" style="left:31.88%;top:64.12%"><b>F1-2</b><span>320 kWh</span></div><div class="atg up sm v0 v1" style="left:63.77%;top:64.12%"><b>F2-1</b><span>290 kWh</span></div><div class="atg up sm v0 v1" style="left:84.06%;top:64.12%"><b>F2-2</b><span>335 kWh</span></div><div class="atg up sm bad v2 v3" style="left:31.88%;top:64.12%"><b>F1-2</b><span>95 kWh ↓70%</span></div><div class="atg up sm ok v3" style="left:11.59%;top:64.12%"><b>F1-1</b><span>310 kWh ✓</span></div><div class="atg up sm v2" style="left:63.77%;top:64.12%"><b>F2-1</b><span>290 kWh</span></div><div class="atg up sm v2" style="left:84.06%;top:64.12%"><b>F2-2</b><span>335 kWh</span></div><div class="atg up ok v3" style="left:21.74%;top:20.59%"><b data-kh="ត្រង់ស្វូ F1">Transformer F1</b><span data-kh="អ្នកជិតខាងធម្មតា">Neighbours normal</span></div><div class="atg up alert v3" style="left:49.28%;top:58.82%"><b data-kh="ការជូនដំណឹង · ធ្លាក់ចុះភ្លាមៗ">Alert · sudden drop</b><span data-kh="−70% រយៈពេល 3 ខែ → ចុះពិនិត្យ">−70% for 3 months → inspect</span></div></div>
   <div class="eyebrow lveb a" data-kh="០៣ · ទិដ្ឋភាពទូទៅនៃដំណោះស្រាយ · Algorithm ទី 3">03 &middot; Solution overview &middot; Algorithm 3 of 3</div>
   <h2 class="lvh a" style="--d:1" data-kh="&lt;span class=&quot;grad&quot;&gt;ការធ្លាក់ចុះការប្រើប្រាស់ភ្លាមៗ&lt;/span&gt; របស់អតិថិជនម្នាក់ៗ">Individual consumer <span class="grad">sudden consumption reduction</span></h2>
   <p class="algobj a" style="--d:2" data-kh="&lt;b&gt;គោលបំណង&lt;/b&gt; រកអតិថិជនម្នាក់ៗ ដែលការប្រើប្រាស់អគ្គិសនីធ្លាក់ចុះភ្លាមៗ ធៀបនឹងលំនាំប្រវត្តិធម្មតារបស់ខ្លួន។"><b>Objective</b> Find individual consumers whose electricity consumption suddenly decreases compared with their normal historical pattern.</p>
