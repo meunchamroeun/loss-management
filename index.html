@@ -1085,6 +1085,18 @@ svg.lu{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .bn2b .bk{width:calc((100% - 44px)/3)}
 .bnote{top:916px!important}
 .bn2{top:296px}
+
+/* ===== print fixes ===== */
+@media print{
+ .grad,.g,.h .g,.vw,.ccq b,.tl-stat b,.ns-stat b{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;-webkit-text-fill-color:currentColor!important;color:var(--pri)!important}
+ .tags.focus .tg,.rstags.focus .tg{opacity:1!important;transform:none!important;box-shadow:none!important}
+ .lcs,.stp,.nsk,.bstep,.axk,.alink,.nsr,#rsRows .tr{opacity:1!important;filter:none!important;transform:none!important}
+ .edge,.axhint,.nshint,.bnhint{display:none!important}
+}
+@media screen{
+ .deck.printing .viewport::after{content:"Preparing print\2026";position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--mu);font:600 22px Inter}
+ .deck.printing[data-lang="km"] .viewport::after{content:"\1780\17C6\1796\17BB\1784\179A\17C0\1794\1785\17C6\1794\17C4\17C7\1796\17BB\1798\17D2\1796\2026"}
+}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:50;background:rgba(5,4,15,.82);display:none;align-items:center;justify-content:center;padding:40px;backdrop-filter:blur(6px)}
 .lb.open{display:flex;animation:fade .3s ease}
